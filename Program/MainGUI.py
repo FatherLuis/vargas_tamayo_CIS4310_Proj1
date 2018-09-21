@@ -93,11 +93,6 @@ class MainGUI:
         btnEnter.bind('<ButtonRelease-1>', self.__btnEnter_click)
 
 
-    def Calculation(self,data):
-
-
-
-
     # Method Name: Run()
     # Purpose: this will allow the the GUI to run (start)
     # Parameter: self
