@@ -35,14 +35,14 @@ class MainGUI:
     def __btnUpLoad_click(self, event):
 
         # USES A CLASS METHOD OT OPEN A TEXT FILE
-        self.rules.openFile()
+        self.data.openFile()
         # USES A CLASS METHOD TO READ A TEXT FILE
-        self.rules.readFile()
+        self.data.readFile()
 
         # GUI LABEL1 WILL CONTAIN THE NAME OF THE FILE (IF ANY)
-        self.lbl1.config(text=self.rules.fileName)
+        self.lbl1.config(text=self.data.fileName)
         # LBLSTATUS IS CLEARED
-
+        self.lblStatus.config(text='')
 
     # Method Name:__INIT__
     # Purpose: Class constructor
@@ -53,7 +53,7 @@ class MainGUI:
     def __init__(self):
 
         # class variable will hold the class object File_IO()
-        self.rules = File_IO()
+        self.data = File_IO()
 
         # CLASS VARIABLE WILL HOLD THE REFERENCE TO THE GUI WINDOW
         self.MainGUI = tk.Tk()
@@ -76,6 +76,10 @@ class MainGUI:
         # PLACES THE LABEL IN THE FOLLOWING COORDINATES ON THE GUI
         self.lbl1.place(x=150, y=22)
 
+        self.lblStatus = tk.Label(self.MainGUI, height=2, text='')
+        # PLACES THE LABEL IN THE FOLLOWING COORDINATE ON THE GUI
+        self.lblStatus.place(x=120, y=120)
+
         # CREATES AN OBJECT TEXTBOX
         self.txtUserInput = tk.Entry(self.MainGUI, width=30, )
         # PLACES THE TEXTBOOK IN THE FOLLOWING COORDINATE ON THi GUI
@@ -87,6 +91,12 @@ class MainGUI:
         btnEnter.place(x=120, y=210)
         # BINDS AN EVENT METHOD TO THE BUTTON
         btnEnter.bind('<ButtonRelease-1>', self.__btnEnter_click)
+
+
+    def Calculation(self,data):
+
+
+
 
     # Method Name: Run()
     # Purpose: this will allow the the GUI to run (start)

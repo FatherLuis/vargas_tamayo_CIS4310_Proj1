@@ -47,23 +47,23 @@ class File_IO:
     def readFile(self):
 
         with open(self.file) as csv_file:
+
             csv_reader = csv.reader(csv_file, delimiter=",")
             index = 0
 
             for row in csv_reader:
 
-                stateObject = State(row[0])
-
-                self.states.append(stateObject)
+                self.states.append(State(row[0]))
                 self.states[index].addInfo(row[1])
                 self.states[index].addInfo(row[2])
                 self.states[index].addInfo(row[3])
                 self.states[index].addInfo(row[4])
 
-                print(self.states[index].getName())
-
                 index += 1
 
+            #print(self.states[0].getName())
 
 
+    def getStates(self):
+        return self.states
 
