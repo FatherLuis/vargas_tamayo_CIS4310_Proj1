@@ -1,6 +1,7 @@
+import csv
 import os
 from tkinter import filedialog
-import re
+from Program.State import State
 
 # Class name: File_IO
 # Class Author: Luis E. Vargas Tamayo
@@ -21,7 +22,7 @@ class File_IO:
     def __init__(self):
         # class variable will hold the string name of a file
         self.fileName = ''
-
+        self.states = []
 
     # Method Name: openFile()
     # Purpose: Class Constructor
@@ -42,25 +43,27 @@ class File_IO:
     # Method used: createRuleBook()
     # Return Value: none
     # Date:  April 2, 2019
+
     def readFile(self):
 
-        try:
-            # Opens file from filepath # Read Only
-            file = open('' + self.file + '', 'r')
+        with open(self.file) as csv_file:
+            csv_reader = csv.reader(csv_file, delimiter=",")
+            index = 0
 
-            # CREATES A LIST STRING THAT WILL HOLD EACH LINE FROM THE TEXT FILE
-            lineString = []
+            for row in csv_reader:
 
-            # ITERATES THROUGH EACH LINE OF THE FILE AND APPENDS TO THE LIST
-            for line in file:
-                lineString.append(line)
+                stateObject = State(row[0])
+
+                self.states.append(stateObject)
+                self.states[index].addInfo(row[1])
+                self.states[index].addInfo(row[2])
+                self.states[index].addInfo(row[3])
+                self.states[index].addInfo(row[4])
+
+                print(self.states[index].getName())
+
+                index += 1
 
 
 
-        except:
 
-            # IF ANY ERROR, FILE IS CLOSED AND USER WILL BE NOTIFIED THAT THE FILE WAS NOT USED
-            self.fileName = 'No File Selected'
-        else:
-            # FILE IS CLOSED
-            file.close()

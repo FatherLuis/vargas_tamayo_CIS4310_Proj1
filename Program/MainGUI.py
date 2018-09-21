@@ -42,7 +42,7 @@ class MainGUI:
         # GUI LABEL1 WILL CONTAIN THE NAME OF THE FILE (IF ANY)
         self.lbl1.config(text=self.rules.fileName)
         # LBLSTATUS IS CLEARED
-        self.lblStatus.config(text='')
+
 
     # Method Name:__INIT__
     # Purpose: Class constructor
