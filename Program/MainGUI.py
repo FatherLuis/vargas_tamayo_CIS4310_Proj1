@@ -1,4 +1,6 @@
 import tkinter as tk
+
+from Program.Calculation import Calculation
 from Program.File_IO import File_IO
 
 
@@ -38,6 +40,9 @@ class MainGUI:
         self.data.openFile()
         # USES A CLASS METHOD TO READ A TEXT FILE
         self.data.readFile()
+        self.calculator = Calculation(self.data.getStates())
+        self.calculator.MainCalculation()
+
 
         # GUI LABEL1 WILL CONTAIN THE NAME OF THE FILE (IF ANY)
         self.lbl1.config(text=self.data.fileName)
@@ -54,6 +59,8 @@ class MainGUI:
 
         # class variable will hold the class object File_IO()
         self.data = File_IO()
+
+        self.calculator = 0
 
         # CLASS VARIABLE WILL HOLD THE REFERENCE TO THE GUI WINDOW
         self.MainGUI = tk.Tk()

@@ -21,7 +21,8 @@ class State:
     def getContainer(self):
         return self.container
 
-
+    def setInfo(self, index, value):
+        self.container[index] = value
 
     def getName(self):
         return self.name

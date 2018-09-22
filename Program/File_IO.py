@@ -54,10 +54,10 @@ class File_IO:
             for row in csv_reader:
 
                 self.states.append(State(row[0]))
-                self.states[index].addInfo(row[1])
-                self.states[index].addInfo(row[2])
-                self.states[index].addInfo(row[3])
-                self.states[index].addInfo(row[4])
+                self.states[index].addInfo(float(row[1]))
+                self.states[index].addInfo(float(row[2]))
+                self.states[index].addInfo(float(row[3]))
+                self.states[index].addInfo(float(row[4]))
 
                 index += 1
 
