@@ -15,6 +15,9 @@ class Point:
     def getCoordinate(self):
         return str(self.name) + ": (" + str(self.x) + ", " + str(self.y) + ")"
 
+    def getName(self):
+        return self.name
+
     def getx(self):
         return self.x
 

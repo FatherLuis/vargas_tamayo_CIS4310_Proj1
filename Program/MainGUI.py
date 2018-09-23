@@ -1,7 +1,10 @@
 import tkinter as tk
+import tkinter.scrolledtext as tkst
 
 from Program.Calculation import Calculation
+from Program.Cluster import Cluster
 from Program.File_IO import File_IO
+
 
 
 # Class name: MainGUI
@@ -22,7 +25,13 @@ class MainGUI:
     def __btnEnter_click(self, event):
 
         if self.lbl1.cget('text') != 'No File Selected':
-            print("Hello World")
+            self.editArea.delete('1.0', tk.END)
+            #print("Hello World")
+            self.cluster = Cluster(self.calculator.getPoints(), int(self.txtUserInput.get()))
+            self.cluster.Clustering()
+
+            self.editArea.insert(tk.INSERT, self.cluster.getInformation())
+
 
 
         else:
@@ -61,15 +70,16 @@ class MainGUI:
         self.data = File_IO()
 
         self.calculator = 0
+        self.cluster = 0
 
         # CLASS VARIABLE WILL HOLD THE REFERENCE TO THE GUI WINDOW
         self.MainGUI = tk.Tk()
         # WINDOW TEXT WILL CONTAIN A TEXT
         self.MainGUI.title('K-Mean Cluster')
         # THE INITIAL SIZE OF THE GUI
-        self.MainGUI.geometry('400x300')
+        self.MainGUI.geometry('600x300')
         # THE MINIMUM SIZE OF THE GUI
-        self.MainGUI.minsize(400, 300)
+        self.MainGUI.minsize(600, 300)
 
         # CREATES AN OBJECT BUTTON USED ON THE GUI
         btnUpload = tk.Button(self.MainGUI, width=15, height=2, text='Upload File')
@@ -98,6 +108,19 @@ class MainGUI:
         btnEnter.place(x=120, y=210)
         # BINDS AN EVENT METHOD TO THE BUTTON
         btnEnter.bind('<ButtonRelease-1>', self.__btnEnter_click)
+
+        self.editArea = tkst.ScrolledText(
+            master=self.MainGUI,
+            wrap=tk.WORD,
+            width=20,
+            height=15,
+            #state = tk.DISABLED
+        )
+        # Don't use widget.place(), use pack or grid instead, since
+        # They behave better on scaling the window -- and you don't
+        # have to calculate it manually!
+        self.editArea.pack(padx=10, pady=10, fill=tk.NONE, expand=False)
+        self.editArea.place(x=350, y=50)
 
 
     # Method Name: Run()

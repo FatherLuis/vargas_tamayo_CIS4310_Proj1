@@ -74,6 +74,9 @@ class Calculation:
 
             self.points.append(Point(self.data[i].getName(), float(state[2]), float(sum/3)))
 
+    def getPoints(self):
+        return self.points
+
 
     def MainCalculation(self):
 
