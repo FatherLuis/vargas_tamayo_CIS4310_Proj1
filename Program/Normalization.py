@@ -1,8 +1,21 @@
 
+# Class name: Normalization
+# Class Author: Luis E. Vargas Tamayo
+# Purpose of the class: Normalize a numeric number to a given range
+# Date: September 23, 2018
+# List of changes with dates: none
+# Special Notes: none
+
 
 class Normalization:
 
-    def __init__(self, dtHigh,dtLow,nmHigh,nmLow):
+    # Method Name: __init__
+    # Purpose: Constructor
+    # Parameter: self,
+    # Method used: none
+    # Return Value: none
+    # Date:  September 23, 2018
+    def __init__(self, dtHigh, dtLow, nmHigh, nmLow):
 
         self.dataHigh = dtHigh
         #print(self.dataHigh)
@@ -16,7 +29,13 @@ class Normalization:
         #print(self.dataRange)
         self.normalizeRange = self.normHigh - self.normLow
         #print(self.normalizeRange)
-        
+
+    # Method Name: Normalize
+    # Purpose: return a normalized number
+    # Parameter: self,
+    # Method used: none
+    # Return Value: numeric
+    # Date:  September 23, 2018
     def Normalize(self,num):
         
         number = num - self.dataLow
@@ -28,7 +47,13 @@ class Normalization:
         #print(finalNormNum)
 
         return finalNormNum
-    
+
+    # Method Name: DeNormalize
+    # Purpose: return a denormalized number
+    # Parameter: self,
+    # Method used: none
+    # Return Value: numeric
+    # Date:  September 23, 2018
     def DeNormalize(self,number):
 
         dNormNum = number - self.normLow
@@ -37,11 +62,4 @@ class Normalization:
         orinNum = num + self.dataLow
 
         return orinNum
-        
-        
-#car = Normalization(4000,100,1,-1)
-#print(car.Normalize(1000))
 
-#print(car.DeNormalize(-0.54))
-        
-        

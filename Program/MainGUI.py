@@ -21,18 +21,19 @@ class MainGUI:
     # Parameter: self, event
     # Method used: none
     # Return Value: none
-    # Date:  April 2, 2019
+    # Date:  April 2, 2018
     def __btnEnter_click(self, event):
 
+        #IF NO FILE IS SELECTED, THEN THERE THE CODE IS NOT EXECUTED
         if self.lbl1.cget('text') != 'No File Selected':
+            #DELETE ANY TEXT FOUND IN THE TEXTAREA
             self.editArea.delete('1.0', tk.END)
-            #print("Hello World")
+            #CREATES CLUSTERS BY SENDING IN THE DATA POINTS AND THE NUMBER OF CLUSTERS CREATED
             self.cluster = Cluster(self.calculator.getPoints(), int(self.txtUserInput.get()))
+            #THIS LINE OF CODE CREATES THE CLUSTERS
             self.cluster.Clustering()
-
+            # AFTER THE STATES ARE CLUSTERED IN, THE INFORMATION IS POSTED ON THE TEXTAREA
             self.editArea.insert(tk.INSERT, self.cluster.getInformation())
-
-
 
         else:
             self.lblStatus.config(text= 'No acceptable file has been selected yet.')
@@ -42,16 +43,18 @@ class MainGUI:
     # Parameter: self, event
     # Method used: none
     # Return Value: none
-    # Date:  April 2, 2019
+    # Date:  April 2, 2018
     def __btnUpLoad_click(self, event):
 
         # USES A CLASS METHOD OT OPEN A TEXT FILE
         self.data.openFile()
         # USES A CLASS METHOD TO READ A TEXT FILE
         self.data.readFile()
+        #SENDS IN THE STATE LIST OBJECTS TO THE PARAMENETER
+        # OF CALCULATOR AND FINDS NECESSARY INFORMATION FOR COMPUTATION
         self.calculator = Calculation(self.data.getStates())
+        #MAKES NECESSARY CALCULATIONS FROM THE DATA GIVEN
         self.calculator.MainCalculation()
-
 
         # GUI LABEL1 WILL CONTAIN THE NAME OF THE FILE (IF ANY)
         self.lbl1.config(text=self.data.fileName)
@@ -63,7 +66,7 @@ class MainGUI:
     # Parameter: self
     # Method used: __btnEnter(), __btnUpLoad()
     # Return Value: none
-    # Date:  April 2, 2019
+    # Date:  April 2, 2018
     def __init__(self):
 
         # class variable will hold the class object File_IO()
@@ -109,6 +112,7 @@ class MainGUI:
         # BINDS AN EVENT METHOD TO THE BUTTON
         btnEnter.bind('<ButtonRelease-1>', self.__btnEnter_click)
 
+        #CREATES A TEXTAREA
         self.editArea = tkst.ScrolledText(
             master=self.MainGUI,
             wrap=tk.WORD,
@@ -116,9 +120,7 @@ class MainGUI:
             height=15,
             #state = tk.DISABLED
         )
-        # Don't use widget.place(), use pack or grid instead, since
-        # They behave better on scaling the window -- and you don't
-        # have to calculate it manually!
+        #SETS THE PLACEMENT OF OBJECT
         self.editArea.pack(padx=10, pady=10, fill=tk.NONE, expand=False)
         self.editArea.place(x=350, y=50)
 
@@ -128,7 +130,7 @@ class MainGUI:
     # Parameter: self
     # Method used: none
     # Return Value: none
-    # Date:  April 2, 2019
+    # Date:  April 2, 2018
     def run(self):
         # This is the method used for the gui to be seen on screen
         self.MainGUI.mainloop()
