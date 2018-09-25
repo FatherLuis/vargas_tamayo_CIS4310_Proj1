@@ -33,13 +33,12 @@ class MainGUI:
 
             if (self.Is_Integer(self.txtUserInput.get())):
                 #CREATES CLUSTERS BY SENDING IN THE DATA POINTS AND THE NUMBER OF CLUSTERS CREATED
-                self.cluster = Cluster(self.calculator.getPoints(), int(self.txtUserInput.get()))
+                self.cluster = Cluster(self.calculator.getPoints(), int(float(self.txtUserInput.get())))
                 #THIS LINE OF CODE CREATES THE CLUSTERS
                 self.cluster.Clustering()
                 # AFTER THE STATES ARE CLUSTERED IN, THE INFORMATION IS POSTED ON THE TEXTAREA
                 self.editArea.insert(tk.INSERT, self.cluster.getInformation())
-            else:
-                self.lblStatus.config(text='Input must be an integer')
+
         else:
             self.lblStatus.config(text= 'No acceptable file has been selected yet.')
 
@@ -51,18 +50,30 @@ class MainGUI:
     # Date:  April 2, 2018
     def __btnUpLoad_click(self, event):
 
-        # USES A CLASS METHOD OT OPEN A TEXT FILE
-        self.data.openFile()
-        # USES A CLASS METHOD TO READ A TEXT FILE
-        self.data.readFile()
+        # class variable will hold the class object File_IO()
+        self.data = File_IO()
+
+        self.calculator = 0
+        self.cluster = 0
+
+        try:
+            # USES A CLASS METHOD OT OPEN A TEXT FILE
+            self.data.openFile()
+            # USES A CLASS METHOD TO READ A TEXT FILE
+            self.data.readFile()
+            # GUI LABEL1 WILL CONTAIN THE NAME OF THE FILE (IF ANY)
+            self.lbl1.config(text=self.data.fileName)
+        except:
+            self.lbl1.config(text= 'No File Selected')
+
+
         #SENDS IN THE STATE LIST OBJECTS TO THE PARAMENETER
         # OF CALCULATOR AND FINDS NECESSARY INFORMATION FOR COMPUTATION
         self.calculator = Calculation(self.data.getStates())
         #MAKES NECESSARY CALCULATIONS FROM THE DATA GIVEN
         self.calculator.MainCalculation()
 
-        # GUI LABEL1 WILL CONTAIN THE NAME OF THE FILE (IF ANY)
-        self.lbl1.config(text=self.data.fileName)
+
         # LBLSTATUS IS CLEARED
         self.lblStatus.config(text='')
 
@@ -75,7 +86,16 @@ class MainGUI:
     def Is_Integer(self,num):
 
         try:
-            return float(num).is_integer()
+            if float(num).is_integer():
+
+                if not(float(num) > 0 and float(num) < 50):
+
+                    self.lblStatus.config(text='Input must be an integer between 0 and 50,\n exclusive')
+                    return False
+                return True
+            else:
+                self.lblStatus.config(text='Input must be an integer')
+                return False
         except:
             return False
 
@@ -88,11 +108,7 @@ class MainGUI:
     # Date:  April 2, 2018
     def __init__(self):
 
-        # class variable will hold the class object File_IO()
-        self.data = File_IO()
 
-        self.calculator = 0
-        self.cluster = 0
 
         # CLASS VARIABLE WILL HOLD THE REFERENCE TO THE GUI WINDOW
         self.MainGUI = tk.Tk()
@@ -117,7 +133,7 @@ class MainGUI:
 
         self.lblStatus = tk.Label(self.MainGUI, height=2, text='')
         # PLACES THE LABEL IN THE FOLLOWING COORDINATE ON THE GUI
-        self.lblStatus.place(x=120, y=120)
+        self.lblStatus.place(x=120, y=110)
 
         # CREATES AN OBJECT TEXTBOX
         self.txtUserInput = tk.Entry(self.MainGUI, width=30, )
@@ -141,7 +157,7 @@ class MainGUI:
         )
         #SETS THE PLACEMENT OF OBJECT
         self.editArea.pack(padx=10, pady=10, fill=tk.NONE, expand=False)
-        self.editArea.place(x=350, y=50)
+        self.editArea.place(x=370, y=50)
 
 
     # Method Name: Run()

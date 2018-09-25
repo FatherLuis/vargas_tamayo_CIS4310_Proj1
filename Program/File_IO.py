@@ -32,8 +32,10 @@ class File_IO:
     # Date:  April 2, 2018
     def openFile(self):
 
+
         # opens file dialog to get file path
         self.file = filedialog.askopenfilename()
+
         # get basic file names
         self.fileName = os.path.basename(self.file)
 
