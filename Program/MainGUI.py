@@ -24,17 +24,22 @@ class MainGUI:
     # Date:  April 2, 2018
     def __btnEnter_click(self, event):
 
+        self.lblStatus.config(text='')
+
         #IF NO FILE IS SELECTED, THEN THERE THE CODE IS NOT EXECUTED
         if self.lbl1.cget('text') != 'No File Selected':
             #DELETE ANY TEXT FOUND IN THE TEXTAREA
             self.editArea.delete('1.0', tk.END)
-            #CREATES CLUSTERS BY SENDING IN THE DATA POINTS AND THE NUMBER OF CLUSTERS CREATED
-            self.cluster = Cluster(self.calculator.getPoints(), int(self.txtUserInput.get()))
-            #THIS LINE OF CODE CREATES THE CLUSTERS
-            self.cluster.Clustering()
-            # AFTER THE STATES ARE CLUSTERED IN, THE INFORMATION IS POSTED ON THE TEXTAREA
-            self.editArea.insert(tk.INSERT, self.cluster.getInformation())
 
+            if (self.Is_Integer(self.txtUserInput.get())):
+                #CREATES CLUSTERS BY SENDING IN THE DATA POINTS AND THE NUMBER OF CLUSTERS CREATED
+                self.cluster = Cluster(self.calculator.getPoints(), int(self.txtUserInput.get()))
+                #THIS LINE OF CODE CREATES THE CLUSTERS
+                self.cluster.Clustering()
+                # AFTER THE STATES ARE CLUSTERED IN, THE INFORMATION IS POSTED ON THE TEXTAREA
+                self.editArea.insert(tk.INSERT, self.cluster.getInformation())
+            else:
+                self.lblStatus.config(text='Input must be an integer')
         else:
             self.lblStatus.config(text= 'No acceptable file has been selected yet.')
 
@@ -61,6 +66,20 @@ class MainGUI:
         # LBLSTATUS IS CLEARED
         self.lblStatus.config(text='')
 
+    # Method Name: Is_Integer()
+    # Purpose: checks if string/number is an integer
+    # Parameter: self, num
+    # Method used: none
+    # Return Value: boolean
+    # Date:  April 2, 2018
+    def Is_Integer(self,num):
+
+        try:
+            return float(num).is_integer()
+        except:
+            return False
+
+
     # Method Name:__INIT__
     # Purpose: Class constructor
     # Parameter: self
@@ -82,7 +101,7 @@ class MainGUI:
         # THE INITIAL SIZE OF THE GUI
         self.MainGUI.geometry('600x300')
         # THE MINIMUM SIZE OF THE GUI
-        self.MainGUI.minsize(600, 300)
+        self.MainGUI.minsize(600, 310)
 
         # CREATES AN OBJECT BUTTON USED ON THE GUI
         btnUpload = tk.Button(self.MainGUI, width=15, height=2, text='Upload File')
