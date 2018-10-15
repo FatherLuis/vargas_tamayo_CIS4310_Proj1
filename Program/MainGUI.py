@@ -75,7 +75,7 @@ class MainGUI:
 
 
         # LBLSTATUS IS CLEARED
-        self.lblStatus.config(text='')
+        self.lblStatus.config(text='Enter number of Clusters')
 
     # Method Name: Is_Integer()
     # Purpose: checks if string/number is an integer
@@ -134,6 +134,7 @@ class MainGUI:
         self.lblStatus = tk.Label(self.MainGUI, height=2, text='')
         # PLACES THE LABEL IN THE FOLLOWING COORDINATE ON THE GUI
         self.lblStatus.place(x=120, y=110)
+        self.lblStatus.config(text='Enter number of Clusters')
 
         # CREATES AN OBJECT TEXTBOX
         self.txtUserInput = tk.Entry(self.MainGUI, width=30, )
